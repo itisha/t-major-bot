@@ -1,1 +1,1 @@
-worker: sh target/bin/TMajorBot
+worker: sh target/bin/t-major-bot

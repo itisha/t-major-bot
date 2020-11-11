@@ -77,7 +77,7 @@
                         <program>
                             <mainClass>org.tisha.tmajorbot.TMajorBotApplication</mainClass>
                             <!-- heroku script name -->
-                            <name>TMajorBot</name>
+                            <name>t-major-bot</name>
                         </program>
                     </programs>
                 </configuration>
