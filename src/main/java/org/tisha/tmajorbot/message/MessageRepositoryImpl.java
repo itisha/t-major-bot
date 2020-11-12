@@ -4,8 +4,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class MessageRepositoryImpl implements MessageRepository
 {
 
-    List<Message> messages = new LinkedList<>();
+    private List<Message> messages = Collections.synchronizedList( new ArrayList<>( 1000 ) );
 
     @Override
     public Collection<Message> findAllOlderThan( Long durationMinutes )
