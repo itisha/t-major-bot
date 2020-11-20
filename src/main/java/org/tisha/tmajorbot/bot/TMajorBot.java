@@ -37,6 +37,7 @@ public class TMajorBot extends TelegramLongPollingBot
             Integer messageId = update.getMessage().getMessageId();
             String text = update.getMessage().getText();
 
+            log.info( "Incoming message: chatId = {}, messageId={}, text={}", chatId, messageId, text );
             messageService.save( new Message( null, chatId, messageId, LocalDateTime.now(), text ) );
         }
     }
