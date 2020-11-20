@@ -1,14 +1,13 @@
 package org.tisha.tmajorbot.message;
 
-import java.util.Collection;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MessageRepository
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Repository
+public interface MessageRepository extends CrudRepository<Message, Integer>
 {
-    Collection<Message> findAllOlderThan( Long durationMinutes );
-
-    Collection<Message> findAll();
-
-    void removeAll( Collection<Message> messages );
-
-    void add( Message message );
+    List<Message> findAllByTimestampIsBefore( LocalDateTime timestamp );
 }
