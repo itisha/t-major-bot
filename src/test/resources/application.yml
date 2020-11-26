@@ -3,10 +3,11 @@ bot:
   token:
 telegram:
   message:
+    # for how many minutest the message lives
     lifetime:
       minutes: 150
-  purge:
-    cron: '0 0/1 * * * *'
+    purge:
+      cron: '* * * * 12 ?' # once a year hopefully
 
 # Datasource
 spring:
