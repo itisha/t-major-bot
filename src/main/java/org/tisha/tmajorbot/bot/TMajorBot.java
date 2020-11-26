@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.tisha.tmajorbot.message.Message;
-import org.tisha.tmajorbot.message.MessageRepository;
+import org.tisha.tmajorbot.message.MessageService;
 
 import java.time.LocalDateTime;
 
@@ -15,15 +15,15 @@ import java.time.LocalDateTime;
 public class TMajorBot extends TelegramLongPollingBot
 {
 
-    private final MessageRepository messageRepository;
+    private final MessageService messageService;
     private final String botUsername;
     private final String botToken;
 
-    public TMajorBot( MessageRepository messageRepository,
+    public TMajorBot( MessageService messageService,
         @Value( "${bot.username}" ) String botUsername,
         @Value( "${bot.token}" ) String botToken )
     {
-        this.messageRepository = messageRepository;
+        this.messageService = messageService;
         this.botUsername = botUsername;
         this.botToken = botToken;
     }
@@ -35,8 +35,10 @@ public class TMajorBot extends TelegramLongPollingBot
         {
             Long chatId = update.getMessage().getChatId();
             Integer messageId = update.getMessage().getMessageId();
+            String text = update.getMessage().getText();
 
-            messageRepository.add( new Message( chatId, messageId, LocalDateTime.now() ) );
+            log.info( "Incoming message: chatId = {}, messageId={}, text={}", chatId, messageId, text );
+            messageService.save( new Message( null, chatId, messageId, LocalDateTime.now(), text ) );
         }
     }
 

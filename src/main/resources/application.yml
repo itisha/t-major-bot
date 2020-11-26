@@ -1,0 +1,29 @@
+server.port: '${PORT:8080}'
+
+# bot_username can be used as parameter name
+# default value is null
+bot:
+  username: '${bot_username:null}'
+  token: '${bot_token:null}'
+
+#properties for telegram
+telegram:
+  message:
+    # for how many minutest the message lives
+    lifetime:
+      minutes: '${message_duration:15}'
+    purge:
+      cron: '0 0/1 * * * *'
+
+# Datasource
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+  datasource:
+    url: '${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/t_major_bot_test}'
+    username: '${JDBC_DATABASE_USERNAME:postgres}'
+    password: '${JDBC_DATABASE_PASSWORD:password1}'
